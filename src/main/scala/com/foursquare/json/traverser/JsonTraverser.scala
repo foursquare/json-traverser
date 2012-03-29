@@ -3,15 +3,13 @@ package com.foursquare.json.traverser
 import net.liftweb.json.JsonAST.JValue
 
 trait JsonTraverser {
-  def getJson: JValue
-  def getError: Option[JsonError]
-  def getResult[T: ResultType]: Option[T] = {
+  def json: JValue
+  def error: Option[JsonError]
+  def result[T: ResultType]: Option[T] = {
     val resultType = implicitly[ResultType[T]]
-    resultType.parse(getJson)
+    resultType.parse(json)
   }
 
-  // def getIndex(index: Int): JsonTraverser
-  // def getKey(name: String): JsonTraverser
   def apply(index: Int): JsonTraverser
   def apply(name: String): JsonTraverser
 }

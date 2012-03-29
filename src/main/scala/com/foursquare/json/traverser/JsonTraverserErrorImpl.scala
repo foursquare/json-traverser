@@ -2,8 +2,8 @@ package com.foursquare.json.traverser
 
 import net.liftweb.json.JsonAST.{JValue, JNothing}
 
-private case class JsonTraverserErrorImpl(override val getError: Option[JsonError]) extends JsonTraverser {
-  override def getJson: JValue = JNothing
+private case class JsonTraverserErrorImpl(override val error: Option[JsonError]) extends JsonTraverser {
+  override def json: JValue = JNothing
 
   // We propagate only the first error
   override def apply(index: Int): JsonTraverser = this
@@ -11,5 +11,5 @@ private case class JsonTraverserErrorImpl(override val getError: Option[JsonErro
   // We propagate only the first error
   override def apply(name: String): JsonTraverser = this
 
-  override def getResult[T: ResultType]: Option[T] = None
+  override def result[T: ResultType]: Option[T] = None
 }
